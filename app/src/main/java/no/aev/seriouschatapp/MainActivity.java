@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 public class MainActivity extends AppCompatActivity
 {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView chatView;
+    private RecyclerView.Adapter chatAdapter;
+    private RecyclerView.LayoutManager chatLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,18 +22,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.chat_list);
+        chatView = (RecyclerView) findViewById(R.id.chat_list);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
+        chatView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        chatLayoutManager = new LinearLayoutManager(this);
+        chatView.setLayoutManager(chatLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new ChatAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
+        chatAdapter = new ChatAdapter(this);
+        chatView.setAdapter(chatAdapter);
+
     }
 }
