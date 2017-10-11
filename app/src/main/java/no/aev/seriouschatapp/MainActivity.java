@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
 
-    private RecyclerView chatView;
-    private RecyclerView.Adapter chatAdapter;
-    private RecyclerView.LayoutManager chatLayoutManager;
+    private ChatAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,19 +26,45 @@ public class MainActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        chatView = (RecyclerView) findViewById(R.id.chat_list);
+        // Setup RecyclerView
+        RecyclerView rv = (RecyclerView) findViewById(R.id.chat_list);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ChatAdapter(this);
+        rv.setAdapter(adapter);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        chatView.setHasFixedSize(true);
+        try {
+            new LoadConversations(new LoadConversations.OnPostExecute() {
+                @Override
+                public void onPostExecute(List<Conversation> convs) {
+                    adapter.setConvs(convs);
+                }
+            }).execute(new URL("http://192.168.1.34:8080/api/chat/conversations/"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
-        // use a linear layout manager
-        chatLayoutManager = new LinearLayoutManager(this);
-        chatView.setLayoutManager(chatLayoutManager);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
+        return true;
+    }
 
-        // specify an adapter (see also next example)
-        chatAdapter = new ChatAdapter(this);
-        chatView.setAdapter(chatAdapter);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        if (id == R.id.action_settings)
+        {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

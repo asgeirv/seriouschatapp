@@ -53,6 +53,11 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
         return convs.size();
     }
 
+    public void setConvs(List<Conversation> convs) {
+        this.convs = convs;
+        notifyDataSetChanged();
+    }
+
     public void setOnClickListener(OnClickListener listener)
     {
         this.listener = listener;

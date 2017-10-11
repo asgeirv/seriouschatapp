@@ -7,28 +7,14 @@ package no.aev.seriouschatapp;
 public class Conversation
 {
     private Long id;
-    private String user;
-    private String text;
 
-    public Conversation(Long id, String user, String text)
+    public Conversation(Long id)
     {
         this.id = id;
-        this.user = user;
-        this.text = text;
     }
 
     public Long getId()
     {
         return id;
-    }
-
-    public String getUser()
-    {
-        return user;
-    }
-
-    public String getText()
-    {
-        return text;
     }
 }
