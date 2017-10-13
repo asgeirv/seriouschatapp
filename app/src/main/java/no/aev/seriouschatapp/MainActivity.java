@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
         adapter = new ChatAdapter(this);
         rv.setAdapter(adapter);
 
+        /*
         try {
             new LoadConversations(new LoadConversations.OnPostExecute() {
                 @Override
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        */
     }
 
     @Override
