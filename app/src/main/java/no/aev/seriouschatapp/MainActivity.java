@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     private ChatAdapter adapter;
+    private static final String CHAT_URL = "http://192.168.1.34:8080/api/conversation/conversations/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,18 +33,16 @@ public class MainActivity extends AppCompatActivity
         adapter = new ChatAdapter(this);
         rv.setAdapter(adapter);
 
-        /*
         try {
             new LoadConversations(new LoadConversations.OnPostExecute() {
                 @Override
                 public void onPostExecute(List<Conversation> convs) {
                     adapter.setConvs(convs);
                 }
-            }).execute(new URL("http://192.168.1.34:8080/api/chat/conversations/"));
+            }).execute(new URL(CHAT_URL));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        */
     }
 
     @Override

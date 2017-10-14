@@ -37,7 +37,7 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
     @Override
     public ChatAdapter.ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        //View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_list, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation, parent, false);
         return new ChatViewHolder(new View(context));
     }
 
@@ -45,6 +45,7 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
     public void onBindViewHolder(ChatAdapter.ChatViewHolder holder, int position)
     {
         Conversation conv = convs.get(position);
+
     }
 
     @Override
@@ -53,7 +54,8 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
         return convs.size();
     }
 
-    public void setConvs(List<Conversation> convs) {
+    public void setConvs(List<Conversation> convs)
+    {
         this.convs = convs;
         notifyDataSetChanged();
     }
@@ -66,13 +68,15 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
     public class ChatViewHolder extends RecyclerView.ViewHolder
     {
 
+        public TextView text;
+
         public ChatViewHolder(View view)
         {
             super(view);
+            this.text = view.findViewById(R.id.textView);
 
             view.setOnClickListener(new View.OnClickListener()
             {
-                @Override
                 public void onClick(View view)
                 {
                     if (listener != null)
