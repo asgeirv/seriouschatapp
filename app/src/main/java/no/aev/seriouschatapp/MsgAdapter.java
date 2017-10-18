@@ -37,7 +37,7 @@ class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgViewHolder>
     @Override
     public MsgViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message, parent, false);
 
         return new MsgViewHolder(v);
     }

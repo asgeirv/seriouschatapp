@@ -3,4 +3,7 @@
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="chat_id_string">Chat #</string>
+    <string name="msg_hint">Enter message</string>
+    <string name="user_hint">Enter username</string>
+    <string name="send_msg">Send</string>
 </resources>

@@ -2,6 +2,7 @@ package no.aev.seriouschatapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,8 @@ public class ChatActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        FloatingActionButton sendButton = (FloatingActionButton) findViewById(R.id.send_button);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.conv_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
