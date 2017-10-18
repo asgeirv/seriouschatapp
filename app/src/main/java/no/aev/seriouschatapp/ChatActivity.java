@@ -42,6 +42,7 @@ public class ChatActivity extends AppCompatActivity
         rv.setAdapter(adapter);
 
         Intent intent = getIntent();
+        getSupportActionBar().setTitle("Chat #" + intent.getLongExtra("convid", 0));
         Long convID = intent.getLongExtra("convid", 0);
 
         try {
