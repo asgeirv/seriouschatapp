@@ -1,8 +1,8 @@
 package no.aev.seriouschatapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,46 +13,42 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+/**
+ * Created by aev on 18.10.17.
+ */
+
+public class ChatActivity extends AppCompatActivity
 {
 
-    private ConvAdapter adapter;
-    private static final String CONV_URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat/conversations/";
+    private MsgAdapter adapter;
+    private static final String CHAT_URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat?name=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Setup RecyclerView
         RecyclerView rv = (RecyclerView) findViewById(R.id.conv_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ConvAdapter(this);
+        adapter = new MsgAdapter(this);
         rv.setAdapter(adapter);
 
-        adapter.setOnClickListener(new ConvAdapter.OnClickListener()
-        {
-            @Override
-            public void onClick(int position)
-            {
-                Intent intent = new Intent(MainActivity.this,ChatActivity.class);
-                intent.putExtra("convid", adapter.getConvs().get(position).getId());
-                startActivity(intent);
-            }
-        });
+        Intent intent = getIntent();
+        Long convID = intent.getLongExtra("convid", 0);
 
         try {
-            new LoadConversations(new LoadConversations.OnPostExecute() {
+            new LoadMessages(new LoadMessages.OnPostExecute() {
                 @Override
-                public void onPostExecute(List<Conversation> convs) {
-                    System.out.println("Got: " + convs);
-                    adapter.setConvs(convs);
+                public void onPostExecute(List<Message> msgs) {
+                    System.out.println("Got: " + msgs);
+                    adapter.setMsgs(msgs);
                 }
-            }).execute(new URL(CONV_URL));
+            }).execute(new URL(CHAT_URL + convID));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -81,4 +77,5 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 }

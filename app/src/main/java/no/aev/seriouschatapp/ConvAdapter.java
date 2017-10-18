@@ -14,7 +14,7 @@ import java.util.List;
  * Created by aev on 11.10.17.
  */
 
-class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
+class ConvAdapter extends RecyclerView.Adapter<ConvAdapter.ConvViewHolder>
 {
 
     private List<Conversation> convs = new ArrayList<>();
@@ -29,23 +29,26 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
         void onClick(int position);
     }
 
-    public ChatAdapter(Context context)
+    public ConvAdapter(Context context)
     {
         this.context = context;
     }
 
     @Override
-    public ChatAdapter.ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public ConvViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation, parent, false);
-        return new ChatViewHolder(new View(context));
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation, parent, false);
+
+        return new ConvViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ChatAdapter.ChatViewHolder holder, int position)
+    public void onBindViewHolder(ConvViewHolder holder, int position)
     {
         Conversation conv = convs.get(position);
-
+        String text = context.getString(R.string.chat_id_string) + conv.getId().toString();
+        System.out.println(text);
+        holder.text.setText(text);
     }
 
     @Override
@@ -60,17 +63,22 @@ class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>
         notifyDataSetChanged();
     }
 
+    public List<Conversation> getConvs()
+    {
+        return convs;
+    }
+
     public void setOnClickListener(OnClickListener listener)
     {
         this.listener = listener;
     }
 
-    public class ChatViewHolder extends RecyclerView.ViewHolder
+    public class ConvViewHolder extends RecyclerView.ViewHolder
     {
 
         public TextView text;
 
-        public ChatViewHolder(View view)
+        public ConvViewHolder(View view)
         {
             super(view);
             this.text = view.findViewById(R.id.textView);
