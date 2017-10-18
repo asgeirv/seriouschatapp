@@ -47,7 +47,6 @@ class ConvAdapter extends RecyclerView.Adapter<ConvAdapter.ConvViewHolder>
     {
         Conversation conv = convs.get(position);
         String text = context.getString(R.string.chat_id_string) + conv.getId().toString();
-        System.out.println(text);
         holder.text.setText(text);
     }
 
