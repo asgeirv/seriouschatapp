@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     private ConvAdapter adapter;
-    private static final String CONV_URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat/conversations/";
+    private static final String CONV_URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat/conversations/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,7 +23,7 @@ public class ChatActivity extends AppCompatActivity
 {
 
     private MsgAdapter adapter;
-    private static final String CHAT_URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat?name=";
+    private static final String CHAT_URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat?name=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +33,6 @@ public class ChatActivity extends AppCompatActivity
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton sendButton = (FloatingActionButton) findViewById(R.id.send_button);
 
@@ -42,18 +42,24 @@ public class ChatActivity extends AppCompatActivity
         rv.setAdapter(adapter);
 
         Intent intent = getIntent();
-        getSupportActionBar().setTitle("Chat #" + intent.getLongExtra("convid", 0));
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle("Chat #" + intent.getLongExtra("convid", 0));
         Long convID = intent.getLongExtra("convid", 0);
 
-        try {
-            new LoadMessages(new LoadMessages.OnPostExecute() {
+        try
+        {
+            new LoadMessages(new LoadMessages.OnPostExecute()
+            {
                 @Override
-                public void onPostExecute(List<Message> msgs) {
+                public void onPostExecute(List<Message> msgs)
+                {
                     System.out.println("Got: " + msgs);
                     adapter.setMsgs(msgs);
                 }
             }).execute(new URL(CHAT_URL + convID));
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
     }

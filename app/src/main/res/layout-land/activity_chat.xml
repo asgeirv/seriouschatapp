@@ -27,7 +27,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/conv_list"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="190dp"
         android:layout_marginTop="60dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
