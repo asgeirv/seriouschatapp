@@ -97,9 +97,13 @@ public class ChatActivity extends AppCompatActivity
     {
         EditText user = (EditText) findViewById(R.id.user_edit);
         EditText text = (EditText) findViewById(R.id.text_edit);
-        System.out.println("Username: " + user.getText().toString());
-        System.out.println("Message: " + text.getText().toString());
-        sendMessage(user.getText().toString(), text.getText().toString());
+        String userName = user.getText().toString();
+        String msgText = text.getText().toString();
+        System.out.println("Username: " + userName);
+        System.out.println("Message: " + msgText);
+        if (!userName.equals("") && !msgText.equals(""))
+            sendMessage(user.getText().toString(), text.getText().toString());
+        text.setText("");
     }
 
     public void sendMessage(String user, String text)

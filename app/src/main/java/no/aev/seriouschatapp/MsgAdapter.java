@@ -46,11 +46,13 @@ class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgViewHolder>
     public void onBindViewHolder(MsgViewHolder holder, int position)
     {
         Message msg = msgs.get(position);
-        String text = msg.getUser() + "\n"
+        String text = msg.getUser() + ":\n"
                 + msg.getText();
         System.out.println(text);
         holder.text.setText(text);
     }
+
+
 
     @Override
     public int getItemCount()
