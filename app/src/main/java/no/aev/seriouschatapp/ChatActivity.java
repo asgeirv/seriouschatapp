@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import java.net.MalformedURLException;
@@ -22,7 +24,10 @@ public class ChatActivity extends AppCompatActivity
 {
 
     private MsgAdapter adapter;
-    private static final String CHAT_URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat?name=";
+    private static final String URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat";
+    private static final String CHAT_PATH = "?name=";
+    private static final String ADD_MESSAGE_PATH = "/add?name=";
+    private Long convID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +48,8 @@ public class ChatActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("Chat #" + intent.getLongExtra("convid", 0));
-        Long convID = intent.getLongExtra("convid", 0);
+        convID = intent.getLongExtra("convid", 0);
+        String convURL = URL + CHAT_PATH + convID;
 
         try
         {
@@ -55,7 +61,7 @@ public class ChatActivity extends AppCompatActivity
                     System.out.println("Got: " + msgs);
                     adapter.setMsgs(msgs);
                 }
-            }).execute(new URL(CHAT_URL + convID));
+            }).execute(new URL(convURL));
         }
         catch (MalformedURLException e)
         {
@@ -85,6 +91,20 @@ public class ChatActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendButtonOnClick(View v)
+    {
+        EditText user = (EditText) findViewById(R.id.user_edit);
+        EditText text = (EditText) findViewById(R.id.text_edit);
+        System.out.println("Username: " + user.getText().toString());
+        System.out.println("Message: " + text.getText().toString());
+        sendMessage(user.getText().toString(), text.getText().toString());
+    }
+
+    public void sendMessage(String user, String text)
+    {
+        new PostMessageTask().execute(new PostMessageTask.PostMessage(URL + ADD_MESSAGE_PATH + convID, user, text));
     }
 
 }
