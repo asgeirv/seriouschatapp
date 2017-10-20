@@ -2,14 +2,13 @@ package no.aev.seriouschatapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,7 +33,7 @@ public class ChatActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        FloatingActionButton sendButton = (FloatingActionButton) findViewById(R.id.send_button);
+        ImageButton sendButton = (ImageButton) findViewById(R.id.send_button);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.conv_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
