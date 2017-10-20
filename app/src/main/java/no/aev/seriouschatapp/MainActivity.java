@@ -1,6 +1,7 @@
 package no.aev.seriouschatapp;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ConvAdapter(this);
         rv.setAdapter(adapter);
+
+        FloatingActionButton newChatButton = (FloatingActionButton) findViewById(R.id.new_conv_button);
 
         adapter.setOnClickListener(new ConvAdapter.OnClickListener()
         {
