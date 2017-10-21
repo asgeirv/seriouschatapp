@@ -49,25 +49,7 @@ public class ChatActivity extends AppCompatActivity
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("Chat #" + intent.getLongExtra("convid", 0));
         convID = intent.getLongExtra("convid", 0);
-        String convURL = URL + CHAT_PATH + convID;
-
-        try
-        {
-            System.out.println("Fetching messages from " + convURL);
-            new LoadMessages(new LoadMessages.OnPostExecute()
-            {
-                @Override
-                public void onPostExecute(List<Message> msgs)
-                {
-                    System.out.println("Got: " + msgs);
-                    adapter.setMsgs(msgs);
-                }
-            }).execute(new URL(convURL));
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
+        loadMsgs();
     }
 
     @Override
@@ -110,6 +92,29 @@ public class ChatActivity extends AppCompatActivity
     public void sendMessage(String user, String text)
     {
         new PostMessageTask().execute(new PostMessageTask.PostMessage(URL + ADD_MESSAGE_PATH + convID, user, text));
+        loadMsgs();
+    }
+
+    private void loadMsgs()
+    {
+        try
+        {
+            System.out.println("Fetching messages from " + URL + CHAT_PATH + convID);
+            new LoadMessages(new LoadMessages.OnPostExecute()
+            {
+                @Override
+                public void onPostExecute(List<Message> msgs)
+                {
+                    System.out.println("Got: " + msgs);
+                    adapter.setMsgs(msgs);
+                }
+            }).execute(new URL(URL + CHAT_PATH + convID));
+            adapter.notifyDataSetChanged();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }
