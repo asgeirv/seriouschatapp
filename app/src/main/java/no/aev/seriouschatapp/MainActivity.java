@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -96,15 +97,35 @@ public class MainActivity extends AppCompatActivity
         try
         {
             newConvURL = new URL(URL + NEW_CONV_PATH);
-            System.out.println("Fetching " + newConvURL.toString());
             conn = (HttpURLConnection) newConvURL.openConnection();
 
             loadConvs();
         }
         catch (IOException e)
         {
-            Log.e("MainActivity", "Failed to create new conversation.", e);
+            e.printStackTrace();
         }
+
+        /*
+        try
+        {
+            System.out.println("Creating new conversation from " + URL + NEW_CONV_PATH);
+            new NewConversation(new NewConversation.OnPostExecute()
+            {
+                @Override
+                public void onPostExecute(List<Conversation> convs)
+                {
+                    System.out.println("Got: " + convs.toString());
+                    adapter.setConvs(convs);
+                }
+            }).execute(new URL(URL + NEW_CONV_PATH));
+            adapter.notifyDataSetChanged();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        */
     }
 
     /**
