@@ -76,6 +76,12 @@ public class ChatActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Called when the Send button is tapped.
+     * Sends the typed chat message.
+     *
+     * @param v
+     */
     public void sendButtonOnClick(View v)
     {
         EditText user = (EditText) findViewById(R.id.user_edit);
@@ -89,12 +95,20 @@ public class ChatActivity extends AppCompatActivity
         text.setText("");
     }
 
+    /**
+     * Sends a chat message to the server.
+     * @param user Username
+     * @param text Chat message
+     */
     public void sendMessage(String user, String text)
     {
         new PostMessageTask().execute(new PostMessageTask.PostMessage(URL + ADD_MESSAGE_PATH + convID, user, text));
         loadMsgs();
     }
 
+    /**
+     * Loads chat messages from the server.
+     */
     private void loadMsgs()
     {
         try
