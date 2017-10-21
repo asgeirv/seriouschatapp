@@ -53,6 +53,7 @@ public class ChatActivity extends AppCompatActivity
 
         try
         {
+            System.out.println("Fetching messages from " + convURL);
             new LoadMessages(new LoadMessages.OnPostExecute()
             {
                 @Override
