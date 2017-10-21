@@ -48,17 +48,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        try {
-            new LoadConversations(new LoadConversations.OnPostExecute() {
-                @Override
-                public void onPostExecute(List<Conversation> convs) {
-                    System.out.println("Got: " + convs);
-                    adapter.setConvs(convs);
-                }
-            }).execute(new URL(CONV_URL));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        loadConvs();
     }
 
     @Override
@@ -83,5 +73,23 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Loads the list of conversations from the server.
+     */
+    private void loadConvs()
+    {
+        try {
+            new LoadConversations(new LoadConversations.OnPostExecute() {
+                @Override
+                public void onPostExecute(List<Conversation> convs) {
+                    System.out.println("Got: " + convs);
+                    adapter.setConvs(convs);
+                }
+            }).execute(new URL(CONV_URL));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }
