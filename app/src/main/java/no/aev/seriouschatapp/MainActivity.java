@@ -1,11 +1,14 @@
 package no.aev.seriouschatapp;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.JsonReader;
 import android.util.Log;
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     private ConvAdapter adapter;
-    private static final String URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat";
+    private static final String URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat";
     private static final String CONV_PATH = "/conversations";
     private static final String NEW_CONV_PATH = "/newconversation";
 
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.mainmenu, menu);
+
+        // Associate searchable configuration with SearchView
+        SearchManager sm = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView sv = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        sv.setSearchableInfo(sm.getSearchableInfo(getComponentName()));
+
         return true;
     }
 

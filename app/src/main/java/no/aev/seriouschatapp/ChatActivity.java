@@ -24,7 +24,7 @@ public class ChatActivity extends AppCompatActivity
 {
 
     private MsgAdapter adapter;
-    private static final String URL = "http://192.168.1.33:8080/SeriousChat2000/api/chat";
+    private static final String URL = "http://158.38.85.139:8080/SeriousChat2000/api/chat";
     private static final String CHAT_PATH = "?name=";
     private static final String ADD_MESSAGE_PATH = "/add?name=";
     private Long convID;
