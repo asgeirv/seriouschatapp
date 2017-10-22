@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 public class SearchResultsActivity extends AppCompatActivity
 {
 
+    DatabaseTable db = new DatabaseTable(this);
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -31,7 +33,6 @@ public class SearchResultsActivity extends AppCompatActivity
         {
             // Use the search query to search data
             String query = intent.getStringExtra(SearchManager.QUERY);
-
         }
     }
 

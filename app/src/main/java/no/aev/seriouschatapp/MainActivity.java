@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
         // Setup RecyclerView
         RecyclerView rv = (RecyclerView) findViewById(R.id.conv_list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new ConvAdapter(this);
         rv.setAdapter(adapter);
 

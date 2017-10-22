@@ -25,7 +25,6 @@ class ConvAdapter extends RecyclerView.Adapter<ConvAdapter.ConvViewHolder>
 
     public interface OnClickListener
     {
-
         void onClick(int position);
     }
 

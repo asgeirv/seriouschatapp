@@ -24,14 +24,14 @@
             android:name=".ChatActivity"
             android:label="Chat"
             android:parentActivityName=".MainActivity">
-            <!-- Support for API level 15 abd below -->
+            <!-- Support for API level 15 and below -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SearchResultsActivity"
-            android:label="Search"
+            android:label="Search Results"
             android:parentActivityName=".MainActivity">
 
             <intent-filter>
